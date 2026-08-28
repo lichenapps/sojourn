@@ -3,32 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sojourn Privacy Policy</title>
+<title>Privacy policy: Sojourn: Time in Status &amp; Cycle Time for Jira</title>
 <style>
-  :root{--ink:#22333B;--ground:#FBFAF7;--head:#0F2E35;--accent:#C67B35;--rule:#E4E0D6;--code:#F0EDE5}
-  @media (prefers-color-scheme: dark){
-    :root{--ink:#D9D5CB;--ground:#14262C;--head:#EFE6D3;--accent:#F0B44E;--rule:#2C424A;--code:#1D3238}
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff; --fg: #172b4d; --rule: #dfe1e6;
+    --code-bg: #f4f5f7; --head-bg: #f4f5f7; --link: #0052cc;
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--ground);color:var(--ink);
-       font:17px/1.65 Georgia,'Times New Roman',serif}
-  main{max-width:44rem;margin:0 auto;padding:3rem 1.25rem 5rem}
-  h1{font-family:Verdana,Geneva,sans-serif;font-size:1.7rem;line-height:1.25;color:var(--head);
-     border-bottom:3px solid var(--accent);padding-bottom:.75rem}
-  h2{font-family:Verdana,Geneva,sans-serif;font-size:1.15rem;color:var(--head);margin-top:2.2rem}
-  h3{font-family:Verdana,Geneva,sans-serif;font-size:1rem;color:var(--head)}
-  hr{border:none;border-top:1px solid var(--rule);margin:2rem 0}
-  code{background:var(--code);padding:.1em .35em;border-radius:4px;font-size:.85em}
-  .tablewrap{overflow-x:auto}
-  table{border-collapse:collapse;width:100%;font-size:.92em}
-  th,td{text-align:left;padding:.5rem .7rem;border-bottom:1px solid var(--rule);vertical-align:top}
-  th{font-family:Verdana,Geneva,sans-serif;font-size:.8em;letter-spacing:.04em;text-transform:uppercase;color:var(--head)}
-  strong{color:var(--head)}
-  footer{margin-top:3rem;font-size:.85em;opacity:.7}
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1d2125; --fg: #dee4ea; --rule: #38414a;
+      --code-bg: #282e33; --head-bg: #282e33; --link: #85b8ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 2.5rem 1.25rem 6rem; max-width: 52rem;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  h1 { font-size: 1.75rem; line-height: 1.25; margin: 0 0 1.25rem; }
+  h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
+  h3 { font-size: 1.05rem; margin: 1.75rem 0 0.5rem; }
+  p, li { overflow-wrap: break-word; }
+  ol, ul { padding-left: 1.4rem; }
+  li { margin: 0.4rem 0; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.25rem 0; }
+  a { color: var(--link); }
+  code {
+    background: var(--code-bg); border-radius: 3px; padding: 0.1em 0.35em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em;
+  }
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: 0.94rem; }
+  th, td {
+    border: 1px solid var(--rule); padding: 0.55rem 0.7rem;
+    text-align: left; vertical-align: top;
+  }
+  th { background: var(--head-bg); font-weight: 600; }
 </style>
 </head>
 <body>
-<main>
 <h1>Privacy policy: Sojourn: Time in Status &amp; Cycle Time for Jira</h1>
 <p><strong>Vendor:</strong> Lichen. <strong>Contact:</strong> <strong>stillwater.inc.nz+sojourn@gmail.com</strong> <strong>Last updated:</strong> 2026-08-28</p>
 <hr>
@@ -38,48 +54,76 @@
 <hr>
 <h2>2. What the app reads from Jira</h2>
 <p>The app authenticates as itself (as the app, not as you) and requests exactly these things. <strong>One consequence of that is worth stating before the table:</strong> the app sees the projects it has been granted rather than the projects you personally can open, so a report covers all of them and looks the same to everyone who can open the app. Section 3 says what follows from that for settings.</p>
-<div class="tablewrap"><table>
-<thead><tr><th>What</th><th>Why</th></tr></thead><tbody>
+<div class="table-wrap">
+<table>
+<thead><tr><th>What</th><th>Why</th></tr></thead>
+<tbody>
 <tr><td>The list of projects it can see</td><td>A whole-instance query is rejected by Jira, so work is partitioned by project</td></tr>
 <tr><td>Per issue: <strong>key, created date, project, status, issue type, assignee</strong></td><td>These six fields and no others. Every search that reads an issue names them explicitly. The one search that builds a JQL scope asks for the issue key alone, which is less, never more</td></tr>
 <tr><td>Per issue: the <strong>change history</strong> (changelog)</td><td>This is the raw material. It is where "moved from To Do to In Progress at 09:14" lives</td></tr>
 <tr><td>A notification when an issue is <strong>updated</strong></td><td>So the history stays current without re-reading everything</td></tr>
-</tbody></table></div>
+</tbody>
+</table>
+</div>
 <p><strong>About the change history and the update notification, stated precisely because they are the two places other data passes through the app.</strong> Jira's changelog endpoint returns <em>all</em> recorded changes for an issue, which can include edits to fields the app does not care about: a summary being rewritten, a description being edited. The update notification Jira sends when an issue changes carries the same kind of thing, plus whatever fields Jira chooses to put on the issue in that payload. In both cases those entries arrive in the app's memory as part of the message. <strong>The app reads only the status-change entries out of them and stores nothing else.</strong> Nothing from any other field is written to storage, and nothing is sent anywhere. The app never requests issue summaries, descriptions, comments, attachments or custom fields as fields.</p>
 <hr>
 <h2>3. Exactly what is stored, table by table</h2>
 <p>This is the complete list. There are no other tables.</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Table</th><th>Every column it holds</th></tr></thead><tbody>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Table</th><th>Every column it holds</th></tr></thead>
+<tbody>
 <tr><td><strong><code>intervals</code></strong>, one row per status period</td><td>a row id; issue key; project key; status name; entered-at and exited-at timestamps; duration in ms; a sequence number; which write path produced it; <strong>assignee display name</strong>; issue type; a bucket number for that duration; the same duration counted inside your working calendar; and a bucket number for that</td></tr>
 <tr><td><strong><code>issues</code></strong>, one row per issue</td><td>issue key; project key; issue type; <strong>assignee display name</strong>; current status; created-at; last-updated-at</td></tr>
 <tr><td><strong><code>issue_cycle</code></strong>, one row per issue</td><td>issue key; project; <strong>assignee display name</strong>; issue type; created-at; completed-at; number of passes through the workflow; eight cycle and lead-time figures, being three definitions of cycle time and one of lead time, each also counted inside your working calendar, with a bucket number for each of the eight; a fingerprint of the cycle time definition the figures were computed under; and when the row was last written</td></tr>
 <tr><td><strong><code>evt_log</code></strong>, the update ledger</td><td>a row id; issue key; the Jira changelog entry id; when the transition happened; when it was stored; the difference between the two; and which of the timestamp formats Jira sent the transition time in</td></tr>
 <tr><td><strong><code>cycle_state</code></strong>, one row</td><td>a key naming the row; the cycle time definition the rebuild is running under, as a fingerprint; one issue key used as a cursor; how many issues are done; a status word; and two timestamps. No issue data beyond that one key</td></tr>
 <tr><td><strong><code>bf_state</code></strong>, one row</td><td>a key naming the row; the history build's cursor and the list of projects in scope, each as a short piece of text; counters (issues done, rows written, pages, invocations, issues whose history could not be read, requests throttled, time spent waiting, requests shed); two timestamps; a status word; a stop flag; and a note field this version never fills</td></tr>
-<tr><td><strong><code>settings</code></strong>, a handful of rows</td><td>a key, a value and a timestamp per row. The values are your working-hours calendar and a fingerprint of it; your status-group definitions; your cycle time definition, which is the statuses that count as in progress and as done; and timing counters from the last history build</td></tr>
-<tr><td><strong><code>view_state</code></strong>, one row per user per view</td><td><strong>the Atlassian account ID of the user</strong>; which view it is; the view itself (chosen project, grouping, median resolution, JQL text, and whether the status-groups and business-hours toggles were on); and a timestamp</td></tr>
+<tr><td><strong><code>settings</code></strong>, a handful of rows</td><td>a key, a value and a timestamp per row. The values are your working-hours calendar and a fingerprint of it; your status-group definitions; your cycle time definition, which is the statuses that count as in progress and as done; timing counters from the last history build; and a random secret, generated once for your installation, that is used to derive your saved-view key</td></tr>
+<tr><td><strong><code>view_state</code></strong>, one row per user per view</td><td><strong>a one-way hash of your Atlassian account ID, and never the account ID itself</strong>; which view it is; the view itself (chosen project, grouping, median resolution, JQL text, and whether the status-groups and business-hours toggles were on); and a timestamp</td></tr>
 <tr><td><strong><code>scope_meta</code> / <code>scope_set</code></strong></td><td>an id for the scope; <strong>a JQL string you typed</strong>; when it was built; how many issues it matched; a status word; and, in the second table, that id paired with each issue key it matched. Cached so the same scope is not re-fetched</td></tr>
 <tr><td><strong><code>warm_log</code></strong></td><td>a row id; when the ping ran; an id and an age for the container that ran it; how long its query took; and which kind of ping it was. No issue data, no user data</td></tr>
-</tbody></table></div>
+</tbody>
+</table>
+</div>
 <h3>Personal data, named</h3>
-<p>Two of the columns above are personal data and are called out rather than left to be found:</p>
-<ol><li><strong>Assignee display name.</strong> Stored on every interval and every issue row, because reports group by assignee and grouping must not cost a database join. It is the display name only. It is never the account ID. An earlier version of this app stored account IDs by accident in one of its two write paths, which was found, fixed, and is now prevented by a check that runs against the stored data itself.</li><li><strong>Atlassian account ID</strong>, in <code>view_state</code> only, so that the view you left is the view you come back to. It is a key, never displayed, and is not joined to anything else.</li></ol>
-<p>The app stores no email addresses, no avatars, no names other than the assignee display name above, and no free text written by a person other than a JQL query they typed themselves.</p>
+<p>One of the columns above is personal data. A second is derived from personal data and is called out beside it, because the distinction is the sort a reader should be able to check rather than take on trust:</p>
+<ol>
+<li><strong>Assignee display name.</strong> Stored on every interval and every issue row, because reports group by assignee and grouping must not cost a database join. It is the display name only. It is never the account ID. An earlier version of this app stored account IDs by accident in one of its two write paths, which was found, fixed, and is now prevented by a check that runs against the stored data itself.</li>
+<li><strong>The key your saved view is stored under.</strong> The app does not store your Atlassian account ID. <code>view_state</code> is keyed by a value derived from it with a one-way hash, under a random secret that is generated once for your installation, kept in that installation's own storage, and never sent anywhere. The stored value is a hash and not an encrypted copy, so there is no key that turns it back, and it is meaningless outside your own installation because the secret it was derived under never leaves it. It is a key: never displayed, and not joined to anything else. A request that carries no account at all saves no view, rather than being given a fallback key it would share with every other such request.</li>
+</ol>
+<p>The app stores no Atlassian account IDs, no email addresses, no avatars, no names other than the assignee display name above, and no free text written by a person other than a JQL query they typed themselves.</p>
 <h3>Who can see and change what</h3>
 <p>The app is installed once for the whole site, and the tables above are the site's, not any one user's. Three things follow, and they are stated here rather than left to be discovered:</p>
-<ol><li><strong>Reports are the same for everyone.</strong> Because the app reads Jira as itself, a report covers every project the app can see, and any user who can open the app sees those figures, assignee display names included, whether or not they could open the same projects in Jira directly.</li><li><strong>Settings are instance-wide and any user of the app can change them.</strong> The working-hours calendar and the cycle time definition belong to the installation. Changing either marks the stored business-hours or cycle figures as computed under a definition that no longer applies, and the app then refuses to show them until they are rebuilt. There is no separate administrator role inside the app.</li><li><strong>Only the view is per user.</strong> <code>view_state</code> is the one table keyed by a person, and it holds the view you last chose and nothing else.</li></ol>
+<ol>
+<li><strong>Reports are the same for everyone.</strong> Because the app reads Jira as itself, a report covers every project the app can see, and any user who can open the app sees those figures, assignee display names included, whether or not they could open the same projects in Jira directly.</li>
+<li><strong>Settings are instance-wide and any user of the app can change them.</strong> The working-hours calendar and the cycle time definition belong to the installation. Changing either marks the stored business-hours or cycle figures as computed under a definition that no longer applies, and the app then refuses to show them until they are rebuilt. There is no separate administrator role inside the app.</li>
+<li><strong>Only the view is per user.</strong> <code>view_state</code> is the one table with a row per person, keyed by the derived value described above, and it holds the view you last chose and nothing else.</li>
+</ol>
 <p>If that is broader than your site wants, the control is who you grant access to the app.</p>
 <hr>
 <h2>4. Where it lives, and for how long</h2>
-<ul><li><strong>Where:</strong> Atlassian's Forge SQL, provisioned per installation, inside Atlassian's own cloud infrastructure. Forge hosted storage follows your site's data residency: Atlassian states that an app using it is located wherever the Atlassian product it is installed on is pinned, and that if an administrator moves that product to another location the app's data is moved with it. That is Atlassian's mechanism rather than a setting this app controls, and this app does nothing to opt out of it. The vendor has no access to the data and no mechanism by which to gain access. There is no console, no export path and no credential that would reach it.</li><li><strong>How long:</strong> for as long as the app is installed. The derived history is a live index of your Jira data, not an archive, and it is kept current rather than accumulated.</li><li><strong>Deletion:</strong> uninstalling the app removes its storage. Removal is Atlassian's, and it is not instantaneous: Atlassian marks app storage deleted on uninstall and then disposes of it under its own retention policy, during which a reinstallation can be relinked to the previous data if you ask for that. The vendor holds no copy anywhere else, because there was never anywhere else for a copy to be, and nothing needs to be requested from the vendor because the vendor holds nothing.</li><li><strong>Backups:</strong> whatever Atlassian does for Forge SQL. The vendor keeps none.</li></ul>
+<ul>
+<li><strong>Where:</strong> Atlassian's Forge SQL, provisioned per installation, inside Atlassian's own cloud infrastructure. Forge hosted storage follows your site's data residency: Atlassian states that an app using it is located wherever the Atlassian product it is installed on is pinned, and that if an administrator moves that product to another location the app's data is moved with it. That is Atlassian's mechanism rather than a setting this app controls, and this app does nothing to opt out of it. The vendor has no access to the data and no mechanism by which to gain access. There is no console, no export path and no credential that would reach it.</li>
+<li><strong>How long:</strong> for as long as the app is installed. The derived history is a live index of your Jira data, not an archive, and it is kept current rather than accumulated.</li>
+<li><strong>Deletion:</strong> uninstalling the app removes its storage. Removal is Atlassian's, and it is not instantaneous: Atlassian marks app storage deleted on uninstall and then disposes of it under its own retention policy, during which a reinstallation can be relinked to the previous data if you ask for that. The vendor holds no copy anywhere else, because there was never anywhere else for a copy to be, and nothing needs to be requested from the vendor because the vendor holds nothing.</li>
+<li><strong>Backups:</strong> whatever Atlassian does for Forge SQL. The vendor keeps none.</li>
+</ul>
 <hr>
 <h2>5. What the app does NOT do</h2>
-<ul><li>It does not send data to the vendor, or to any third party, in any circumstance.</li><li>It has no analytics, no telemetry, no crash reporting, no session recording, no cookies of its own, no advertising, and no tracking of any kind.</li><li>It does not use your data to train anything.</li><li>It does not modify anything in Jira. Every permission it holds is a read permission.</li><li>It does not email you, and it never asks for a review.</li></ul>
+<ul>
+<li>It does not send data to the vendor, or to any third party, in any circumstance.</li>
+<li>It has no analytics, no telemetry, no crash reporting, no session recording, no cookies of its own, no advertising, and no tracking of any kind.</li>
+<li>It does not use your data to train anything.</li>
+<li>It does not modify anything in Jira. Every permission it holds is a read permission.</li>
+<li>It does not email you, and it never asks for a review.</li>
+</ul>
 <h2>6. Permissions, and why each is held</h2>
 <p>The app requests read-only scopes. There are no write scopes and no egress permissions. Every scope below is held for a call the app actually makes; the calls are the complete list, not a sample.</p>
-<div class="tablewrap"><table>
-<thead><tr><th>Scope</th><th>The call that needs it</th></tr></thead><tbody>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Scope</th><th>The call that needs it</th></tr></thead>
+<tbody>
 <tr><td><code>read:jira-work</code></td><td>Classic scope required by Jira's search and changelog endpoints through the Forge proxy. The granular scopes below are not sufficient on their own: without this one, every search returns 401</td></tr>
 <tr><td><code>read:jira-user</code></td><td>The other half of that pair, and the assignee display name that comes back on a search result</td></tr>
 <tr><td><code>read:jql:jira</code></td><td><code>POST /rest/api/3/search/jql</code> and <code>POST /rest/api/3/search/approximate-count</code>. The JQL you type in the report's scope box is parsed and counted by Jira before any of it is fetched</td></tr>
@@ -91,10 +135,15 @@
 <tr><td><code>read:field:jira</code></td><td>Resolving the six field names the app asks for by name in every request</td></tr>
 <tr><td><code>read:issue-type:jira</code></td><td>The <code>issuetype</code> field, which reports group by</td></tr>
 <tr><td><code>read:user:jira</code></td><td>The assignee's display name, the one piece of personal data the app stores</td></tr>
-</tbody></table></div>
+</tbody>
+</table>
+</div>
 <h3>Removed permissions</h3>
 <p>Holding a permission that is never used is a claim a customer cannot check, so two that this app does not use were removed on 2026-08-28 rather than left in place:</p>
-<ul><li><code>read:issue-details:jira</code>: the app never requests an issue summary, description, comment, attachment or custom field. The six fields it does request are listed in section 2.</li><li><code>read:avatar:jira</code>: the app never requests, reads or stores an avatar.</li></ul>
+<ul>
+<li><code>read:issue-details:jira</code>: the app never requests an issue summary, description, comment, attachment or custom field. The six fields it does request are listed in section 2.</li>
+<li><code>read:avatar:jira</code>: the app never requests, reads or stores an avatar.</li>
+</ul>
 <p>Neither is requested any more, and this is the whole of what was removed. The app was redeployed and re-installed without them, and its full pipeline (the history build, the incremental update path, the JQL scope builder and the report) was then exercised against real Jira data, because a missing permission is enforced by Atlassian at request time and cannot be caught by any test that does not make the request.</p>
 <h2>7. Sub-processors</h2>
 <p>None. There are no sub-processors, because there is no processing anywhere except inside your own Atlassian instance.</p>
@@ -104,7 +153,5 @@
 <p>If a future version of the app ever needed to send data anywhere, it would need declared egress in its manifest, would lose the Runs on Atlassian badge, and would require you to approve the new permission before it could be installed. That is not a promise; it is how the platform works. This policy would be updated before any such version was submitted.</p>
 <h2>10. Contact</h2>
 <p><strong>stillwater.inc.nz+sojourn@gmail.com</strong></p>
-<footer>Sojourn is an app for Jira by Lichen. Contact: stillwater.inc.nz+sojourn@gmail.com</footer>
-</main>
 </body>
 </html>
