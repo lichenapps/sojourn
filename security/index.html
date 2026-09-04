@@ -85,7 +85,7 @@
 <table>
 <thead><tr><th>Control</th><th>What it is</th></tr></thead>
 <tbody>
-<tr><td><strong>Tests</strong></td><td>Every change carries tests, and each new test is seen to FAIL before the change makes it pass. The suite runs on every commit.</td></tr>
+<tr><td><strong>Tests</strong></td><td>Every change carries tests, and each new test is seen to FAIL before the change makes it pass. The suite is run before every deploy.</td></tr>
 <tr><td><strong>Lint</strong></td><td><code>npm run lint</code> over the whole of <code>src/</code>, with <code>no-undef</code> on. It was added after an unlinted file shipped a <code>ReferenceError</code> that silently disabled a feature for one deploy.</td></tr>
 <tr><td><strong>Dependency audit</strong></td><td><code>npm audit --omit=dev --audit-level=high</code>, run as part of the test suite so it cannot be skipped by forgetting. Production dependencies only; development tools are not shipped.</td></tr>
 <tr><td><strong>Runs on Atlassian check</strong></td><td><code>forge eligibility --verbose</code> after every deploy, with all seven trust signals recorded. A change that would introduce egress or a remote fails it.</td></tr>
