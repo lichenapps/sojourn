@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security: Sojourn - Time in Status &amp; Cycle Time for Jira</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff; --fg: #172b4d; --rule: #dfe1e6;
+    --code-bg: #f4f5f7; --head-bg: #f4f5f7; --link: #0052cc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1d2125; --fg: #dee4ea; --rule: #38414a;
+      --code-bg: #282e33; --head-bg: #282e33; --link: #85b8ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 2.5rem 1.25rem 6rem; max-width: 52rem;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  h1 { font-size: 1.75rem; line-height: 1.25; margin: 0 0 1.25rem; }
+  h2 { font-size: 1.3rem; margin: 2.5rem 0 0.75rem; }
+  h3 { font-size: 1.05rem; margin: 1.75rem 0 0.5rem; }
+  p, li { overflow-wrap: break-word; }
+  ol, ul { padding-left: 1.4rem; }
+  li { margin: 0.4rem 0; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.25rem 0; }
+  a { color: var(--link); }
+  code {
+    background: var(--code-bg); border-radius: 3px; padding: 0.1em 0.35em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em;
+  }
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: 0.94rem; }
+  th, td {
+    border: 1px solid var(--rule); padding: 0.55rem 0.7rem;
+    text-align: left; vertical-align: top;
+  }
+  th { background: var(--head-bg); font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>Security: Sojourn - Time in Status &amp; Cycle Time for Jira</h1>
+<p><strong>Contact:</strong> <strong>stillwater.inc.nz+sojourn@gmail.com</strong> <strong>Last updated:</strong> 2026-09-04</p>
+<p>This page says how to report a vulnerability in this app, what the vendor can and cannot reach, what happens if something goes wrong, and which controls exist today. It is written to be checked rather than admired: every claim below is either a property of the Atlassian platform this app is built on, or something the repository can show.</p>
+<hr>
+<h2>1. Reporting a vulnerability</h2>
+<p>Email <strong>stillwater.inc.nz+sojourn@gmail.com</strong> with the words "security" in the subject. Please include what you did, what you observed, and the site or app version if you have them.</p>
+<ul>
+<li><strong>Acknowledgement within 2 business days.</strong> New Zealand business days - the vendor is one person in Auckland, and saying so is more use than implying a rota that does not exist.</li>
+<li><strong>Coordinated disclosure.</strong> Please give us a chance to ship a fix before publishing. We will agree a date with you rather than ask for an open-ended delay, and we will credit you if you want to be credited.</li>
+<li><strong>No bug bounty at present.</strong> There is no money. There is a fast answer from the person who wrote the code.</li>
+</ul>
+<p>Please do not run denial-of-service tests or automated scanners against a customer's Jira site.</p>
+<hr>
+<h2>2. What the vendor can and cannot access</h2>
+<p><strong>Nothing.</strong> That is not a policy, it is the shape of the app.</p>
+<ul>
+<li>The app is a <strong>Forge</strong> app and <strong>Runs on Atlassian</strong>: it executes on Atlassian's infrastructure and stores what it derives in Atlassian-hosted storage provisioned for the installation.</li>
+<li>It <strong>makes no outbound network requests</strong> except to the customer's own Jira site. There are no vendor servers, no analytics, no telemetry, no third-party services. The manifest declares no egress, and the Runs on Atlassian eligibility check is run on every deploy.</li>
+<li>There is therefore <strong>no mechanism by which the vendor can read customer data</strong>, with or without the customer's permission. A request to "just send us the data" cannot be honoured, because there is nowhere for it to go and no path by which the vendor could fetch it.</li>
+<li>All Jira permissions the app requests are <strong>read-only</strong>. It never modifies anything in Jira.</li>
+<li>What a customer sees is checked against <strong>their own Jira permissions on every load</strong>: the report covers only the projects they can browse, and per-issue lists are checked issue by issue.</li>
+</ul>
+<p>The privacy policy's "Who can see what" section is the detailed version of that last point.</p>
+<hr>
+<h2>3. If something goes wrong</h2>
+<p>The steps a one-person vendor can actually keep, and no others:</p>
+<ol>
+<li><strong>Triage within 2 business days</strong> of a report or of noticing an incident. Owner: the security contact above, who is also the developer.</li>
+<li><strong>Contain.</strong> Either deploy a fix, or - if a fix is not immediate and customers are exposed - <strong>withdraw the affected version from the Marketplace</strong> so no further installation gets it.</li>
+<li><strong>Notify.</strong> Atlassian, following Atlassian's security incident notification guidance for Marketplace partners, and affected customers directly at the contact address they installed with. Notification is not conditional on having a fix ready; "we know, here is what we know" comes first.</li>
+<li><strong>Publish.</strong> A dated post-incident note <strong>on this page</strong>: what happened, what was affected, what was done, and what changed so it does not happen again.</li>
+</ol>
+<p><strong>Supported versions: the latest Marketplace version only.</strong> There is no back-porting. A security fix ships as a new version and customers on Atlassian cloud receive it automatically.</p>
+<hr>
+<h2>4. Development controls that exist today</h2>
+<p>Not aspirations - these run on the vendor's machine for every change:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Control</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td><strong>Tests</strong></td><td>Every change carries tests, and each new test is seen to FAIL before the change makes it pass. The suite runs on every commit.</td></tr>
+<tr><td><strong>Lint</strong></td><td><code>npm run lint</code> over the whole of <code>src/</code>, with <code>no-undef</code> on. It was added after an unlinted file shipped a <code>ReferenceError</code> that silently disabled a feature for one deploy.</td></tr>
+<tr><td><strong>Dependency audit</strong></td><td><code>npm audit --omit=dev --audit-level=high</code>, run as part of the test suite so it cannot be skipped by forgetting. Production dependencies only; development tools are not shipped.</td></tr>
+<tr><td><strong>Runs on Atlassian check</strong></td><td><code>forge eligibility --verbose</code> after every deploy, with all seven trust signals recorded. A change that would introduce egress or a remote fails it.</td></tr>
+<tr><td><strong>Read-only scopes</strong></td><td>The manifest requests read scopes only. A write scope would be visible in review and in the app's own permission screen.</td></tr>
+<tr><td><strong>Deploy gate</strong></td><td>A hook prevents production deploys that were not explicitly ordered, so a development experiment cannot reach customers by accident.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Secrets.</strong> The app has one: a per-installation salt, generated once inside the installation's own storage and used to key each user's saved view. It is never transmitted, never leaves Atlassian's infrastructure, and the vendor cannot read it. The vendor's own Atlassian API token is used only for development against a test site and is rotated when a machine changes hands.</p>
+<p><strong>Known dependency exceptions.</strong> At the time of writing the audit reports two <strong>moderate</strong> advisories and none at high or critical, both for <code>uuid</code> reached through Atlassian's own <code>@forge/bridge</code> SDK (<code>@atlaskit/react-ufo</code>). The app does not call <code>uuid</code>, and pinning a nested version inside the vendor SDK would put the tree out of step with the version under Marketplace review. It is recorded, not silenced, and is re-checked whenever <code>@forge/bridge</code> is upgraded.</p>
+<hr>
+<h2>5. What this page is not</h2>
+<p>It does not claim a SOC 2 report, a penetration test, a security team, or a 24/7 rota, because this app has none of those. It claims what a one-person vendor building on Atlassian's own infrastructure can honestly claim: no servers to breach, no data to leak, read-only access, and a fast, named human to email.</p>
+</body>
+</html>

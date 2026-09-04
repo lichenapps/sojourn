@@ -90,6 +90,7 @@
 <h3>Who can see what</h3>
 <p><strong>The report covers only projects you can browse in Jira. Per-issue lists show only issues you can browse. Aggregate figures within a project you can browse may include issues that an issue security level hides from you; per-issue lists do not.</strong></p>
 <p>A per-issue list - the one behind a "Now" count - additionally checks every issue it is about to show against your own Jira permissions, one by one, each time you open it. It reads only the issue key to do so, and stores nothing from that check.</p>
+<p>To report a security issue, or to read how an incident would be handled, see the security page at https://lichenapps.github.io/sojourn/security/</p>
 <p>The app BUILDS its history reading Jira as itself, because a background build has no user to run as; what it SHOWS you is checked against your own Jira permissions, as you, on every load, with no caching, so a permission change takes effect the next time you open a report. The page states how many projects were included. It never states, names or counts what was left out - Jira does not confirm that a project you cannot browse exists, and this app does not do what Jira refuses to do.</p>
 <h3>Personal data, named</h3>
 <p>One of the columns above is personal data. A second is derived from personal data and is called out beside it, because the distinction is the sort a reader should be able to check rather than take on trust:</p>
