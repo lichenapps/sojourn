@@ -46,7 +46,7 @@
 </head>
 <body>
 <h1>Privacy policy: Sojourn: Time in Status &amp; Cycle Time for Jira</h1>
-<p><strong>Vendor:</strong> Lichen. <strong>Contact:</strong> <strong>stillwater.inc.nz+sojourn@gmail.com</strong> <strong>Last updated:</strong> 2026-09-03</p>
+<p><strong>Vendor:</strong> Lichen. <strong>Contact:</strong> <strong>support@lichenapps.com</strong> <strong>Last updated:</strong> 2026-09-05</p>
 <hr>
 <h2>1. The short version</h2>
 <p>Sojourn reads the status-change history of the Jira issues it can see and turns it into per-status durations. Everything it derives is stored inside Atlassian's own infrastructure, in storage provisioned for your installation of the app on your site. <strong>The app makes no outbound network requests to anywhere except your own Jira site.</strong> It has no servers of its own, no analytics, no error-reporting service, and no third-party components that phone home. The vendor cannot read your data.</p>
@@ -76,7 +76,7 @@
 <tbody>
 <tr><td><strong><code>intervals</code></strong>, one row per status period</td><td>a row id; issue key; project key; status name; entered-at and exited-at timestamps; duration in ms; a sequence number; which write path produced it; <strong>assignee display name</strong>; issue type; a bucket number for that duration; the same duration counted inside your working calendar; a bucket number for that; and a flag recording whether the period was entered outside your working hours. The last three are empty until you save a working-hours calendar: the app derives no working-hours figure against a calendar you have not given it</td></tr>
 <tr><td><strong><code>issues</code></strong>, one row per issue</td><td>issue key; project key; issue type; <strong>assignee display name</strong>; current status; created-at; last-updated-at</td></tr>
-<tr><td><strong><code>issue_cycle</code></strong>, one row per issue</td><td>issue key; project; <strong>assignee display name</strong>; issue type; created-at; completed-at; number of passes through the workflow; eight cycle and lead-time figures, being three definitions of cycle time and one of lead time, each also counted inside your working calendar, with a bucket number for each of the eight; a fingerprint of the cycle time definition the figures were computed under; a fingerprint of the working calendar the working-hours figures were computed under; and when the row was last written</td></tr>
+<tr><td><strong><code>issue_cycle</code></strong>, one row per issue</td><td>issue key; project; <strong>assignee display name</strong>; issue type; created-at; completed-at; number of passes through the workflow; eight cycle and lead-time figures, being three definitions of cycle time and one of lead time, each also counted inside your working calendar, with a bucket number for each of the eight; the time the issue spent in the statuses you group as blocked, also counted inside your working calendar, with a bucket number for each; a fingerprint of the cycle time definition the figures were computed under, which is the statuses you mark as in progress, as done, and as blocked; a fingerprint of the working calendar the working-hours figures were computed under; and when the row was last written</td></tr>
 <tr><td><strong><code>evt_log</code></strong>, the update ledger</td><td>a row id; issue key; the Jira changelog entry id; when the transition happened; when it was stored; the difference between the two; and which of the timestamp formats Jira sent the transition time in. Rows older than thirty days are deleted</td></tr>
 <tr><td><strong><code>cycle_state</code></strong>, one row</td><td>a key naming the row; the cycle time definition the rebuild is running under, as a fingerprint; one issue key used as a cursor; how many issues are done; a status word; and two timestamps. No issue data beyond that one key</td></tr>
 <tr><td><strong><code>bf_state</code></strong>, one row</td><td>a key naming the row; the history build's cursor and the list of projects in scope, each as a short piece of text; counters (issues done, rows written, pages, invocations, issues whose history could not be read, requests throttled, time spent waiting, requests shed); two timestamps; a status word; a stop flag; and a note field this version never fills</td></tr>
@@ -159,6 +159,6 @@
 <h2>9. Changes to this policy</h2>
 <p>If a future version of the app ever needed to send data anywhere, it would need declared egress in its manifest, would lose the Runs on Atlassian badge, and would require you to approve the new permission before it could be installed. That is not a promise; it is how the platform works. This policy would be updated before any such version was submitted.</p>
 <h2>10. Contact</h2>
-<p><strong>stillwater.inc.nz+sojourn@gmail.com</strong></p>
+<p><strong>support@lichenapps.com</strong></p>
 </body>
 </html>
